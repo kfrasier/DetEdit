@@ -1,7 +1,7 @@
 function read_ltsahead_GoM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% read_ltsahead.m
+% SM Wiggins 2010
+% minimal edits by KE Frasier 05-19-2015
 %
 % read LTSA header and directories portion of the file
 %

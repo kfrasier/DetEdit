@@ -1,11 +1,20 @@
 % mkTTPP.m
 
-% Take output from de_detector.m and put it into a format for use in
+% Script takes output from de_detector.m and put it into a format for use in
 % detEdit.
+% Output:
+% A TTPP.m file containing 4 variables: 
+%   MTT: An Nx2 vector of detection start and end times, where N is the
+%   number of detections
+%   MPP: An Nx1 vector of recieved level (RL) amplitudes.
+%   MSP: An NxF vector of detection spectra, where F is dictated by the
+%   parameters of the fft used to generate the spectra and any  
+%   normalization preferences.
+%   f = An Fx1 frequency vector associated with MSP
 
 clearvars
 
-% Setup:
+% Setup variables:
 baseDir = 'H:\metadata\'; % directory containing de_detector output
 outDir = 'J:\Rohen\TTPP\'; % directory where you want to save your TTPP file
 siteName = 'HAT02A_part1_test'; % site name, only used to name the output file
@@ -13,6 +22,8 @@ ppThresh = 120; % minimum RL in dBpp. If detections have RL below this
 % threshold, they will be excluded from the output file. Useful if you have
 % an unmanageable number of detections.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % check if the output file exists, if not, make it
 if ~exist(outDir,'dir')==7
     fprintf('Creating output directory %s',outDir)

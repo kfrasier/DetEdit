@@ -5,7 +5,6 @@
 % flag false positives, and/or classify detections according to type.
 % 
 % Script is based on original version by JA Hildebrand (8-12-2014) and 
-% Updates by KE Frasier 05-19-2015
 
 % Inputs:
 % 1) Settings are read in from detEdit_settings.m

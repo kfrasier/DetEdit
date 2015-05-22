@@ -1,22 +1,16 @@
 % detEdit_Settings.m
-% KE Frasier 05-19-2015
 
 % This script is where all hard-coded inputs for detEdit.m and
-% mkLTSsessions.m are set. 
-% At a minimum you should change:
-%     fn - point it at your TTPP file of interest
-%     ltsaDir - where your LTSAs live
-% Other variables can be left alone, depending on your preferences.
+% mkLTSsessions.m are set. At a minimum you should change:
+% fn - point it at your TTPP file of interest
+% LTSA dir
 
 % Location of TTPP file to analyze
 fn = 'J:\Rohen\TTPP\HAT02A_part1_test_TTPP.mat';
 % NOTE: LTSA.m, ID and FD files are assumed to be in the same location.
 
 % Directory where originalLTSAs are located. Only used if running
-% mkLTSAsessions.m. 
-% Note: All LTSAs associated with your detections are expected to be 
-% gathered in this directory. mkLTSAsessions will not look in
-% subdirectories.
+% mkLTSAsessions.m. Note, all LTSAs
 ltsaDir = 'J:\Rohen\ltsa\HAT';
 
 % Amount of time between bouts. Encounters separated by less than this

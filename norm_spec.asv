@@ -1,5 +1,4 @@
 function [specNorm] = norm_spec(specSet,truncIDx)
-% KE Frasier 05-19-2015
 
 % Normalizes spectra by subtracting the slope between specified truncation
 % indices (truncIDx), setting max amplitude to 1 and min amplitude to 0.
@@ -8,9 +7,8 @@ function [specNorm] = norm_spec(specSet,truncIDx)
 % specSet: An nxf matrix of detection spectra, where n is the number of
 % spectra, and f is the number of frequencoes at which the spectra are
 % evaluated.
-% truncIdx: A 2 element vector containing the indices [low, high]
-% between which to compute and subtract the spectral slope, and to 
-% truncate the spectra. 
+% truncIdx: A 2 element vector containing the indices [low, high]between which to 
+% compute and subtract the spectral slope, and to truncate the spectra. 
 
 % Outputs:
 % specNorm: An nxm matrix of detection spectra, where n is the number of

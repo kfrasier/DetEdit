@@ -2,12 +2,10 @@
 
 % This script operates on a set of LTSAs (Long Term Spectral Averages) 
 % associated with detections contained within a TTPP file produced by 
-% mkTTPP.m. The idea is to compute small ltsas for each bout of detections,
-% rather than loading entire ltsas.
+% mkTTPP.m.
 
 % Script is modified from original version by JA Hildebrand (8-12-2014) and 
 % SM Wiggins (03-10-2014).
-% Updates by KE Frasier 05-19-2015
 
 % Inputs:
 % 1) Settings are read in from detEdit_settings.m
@@ -109,7 +107,7 @@ end
 bd = (eb - sb);   %duration bout in sec
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Loop over the number of bouts (sessions), and compute LTSA for each one.
+% Loop over the number of bouts (sessions), and compu
 
 k = 1;
 while (k <= nb)
@@ -118,7 +116,7 @@ while (k <= nb)
         k = k + 1;
         continue
     end
-    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % find which ltsa to use and get pwr and pt vectors
     K = [];
     K = find(sTime <= sb(k) & eTime >= eb(k));
@@ -234,9 +232,7 @@ end
 ltsaFreq = PARAMS.ltsa.f;
 df = PARAMS.ltsa.dfreq;
 
-% Save output for use in detEdit.
 save(fnLTSA,'pwr','pt','bd','nb','eb','sb','gt','ltsaFreq','df','-v7.3')
-
 disp(['Done with file ',fn])
 tc = toc;
 disp(['Elasped Time : ',num2str(tc),' s'])
