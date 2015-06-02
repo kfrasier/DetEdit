@@ -9,7 +9,7 @@
 % Other variables can be left alone, depending on your preferences.
 
 % Location of TTPP file to analyze
-fn = 'J:\Rohen\TTPP\HAT02A_part1_test_TTPP.mat';
+fn = 'I:\TTPP\HAT02A_part1_test_TTPP2.mat';
 % NOTE: LTSA.m, ID and FD files are assumed to be in the same location.
 
 % Directory where originalLTSAs are located. Only used if running

@@ -110,7 +110,7 @@ bd = (eb - sb);   %duration bout in sec
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Loop over the number of bouts (sessions), and compute LTSA for each one.
-
+fprintf('%d sessions to process ', nd)
 k = 1;
 while (k <= nb)
     if eb(k) - sb(k) < minBoutDur / (60*60*24)
