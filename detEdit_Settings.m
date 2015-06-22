@@ -9,7 +9,7 @@
 % Other variables can be left alone, depending on your preferences.
 
 % Location of TTPP file to analyze
-fn = 'I:\TTPP\HAT02A_part1_test_TTPP2.mat';
+fn = 'G:\HAT_metadata\HAT03A_part1_TTPP.mat';
 % NOTE: LTSA.m, ID and FD files are assumed to be in the same location.
 
 % Directory where originalLTSAs are located. Only used if running
@@ -17,7 +17,7 @@ fn = 'I:\TTPP\HAT02A_part1_test_TTPP2.mat';
 % Note: All LTSAs associated with your detections are expected to be 
 % gathered in this directory. mkLTSAsessions will not look in
 % subdirectories.
-ltsaDir = 'J:\Rohen\ltsa\HAT';
+ltsaDir = 'G:\HAT_metadata';
 
 % Amount of time between bouts. Encounters separated by less than this
 % amount will be displayed as one bout.

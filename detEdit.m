@@ -81,7 +81,7 @@ load(fnID)
 % Check to see if there are detections that are labeled both as false
 % positives, and as IDs, and remove any diplicates from the false positive
 % list
-if ~isempty(zFD)
+if ~isempty(zFD) && ~isempty(zID)
     zFD = setdiff(zFD(:,1),zID(:,1));
     save(fnFD,'zFD');
 end
@@ -288,11 +288,12 @@ while (k <= nb)
     dtNofd_trim = (dtNofd <= dl & dtNofd > .01);
     dttVec = 0:.01:dl;
     hDtt = histc(dtNofd(dtNofd_trim),dttVec);
-    bar(dttVec,hDtt)
-    xlabel('ici')
-    xlim([0,dl])
-    grid on
-    
+    if ~isempty(hDtt)
+        bar(dttVec,hDtt)
+        xlabel('ici')
+        xlim([0,dl])
+        grid on
+    end
     
     figure(201);clf;
     % Figure middle panel: RL vs Time
@@ -472,6 +473,8 @@ while (k <= nb)
     elseif strcmp(cc,'a')
         zFD = [zFD; tfd];
         save(fn2,'zFD');
+    elseif strcmp(cc,'j') %Jump to specified bout
+        k = input(' Input target bout:  ');
     else
         k = k+1;  % move forward one bout
     end

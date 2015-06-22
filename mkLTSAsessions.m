@@ -60,7 +60,8 @@ for k = 1:nltsas
     eTime(k) = PARAMS.ltsa.end.dnum + doff;    % end time of ltsa files
     
     % Retain all rawfile start times for all ltsas as matlab datenums
-    rfTime{k,:} = PARAMS.ltsa.dnumStart + doff; 
+    rfTimeStart{k,:} = PARAMS.ltsa.dnumStart + doff;
+    rfTimeEnd{k,:} = PARAMS.ltsa.dnumEnd + doff; 
 end
 disp('done reading ltsa headers')
 
@@ -110,7 +111,7 @@ bd = (eb - sb);   %duration bout in sec
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Loop over the number of bouts (sessions), and compute LTSA for each one.
-fprintf('%d sessions to process ', nd)
+fprintf('%d sessions to process ', nb)
 k = 1;
 while (k <= nb)
     if eb(k) - sb(k) < minBoutDur / (60*60*24)
@@ -129,7 +130,7 @@ while (k <= nb)
             K = K(1);
         end
         L = [];
-        L = find(rfTime{K,:} >= sb(k) & rfTime{K,:} <= eb(k));
+        L = find(rfTimeStart{K,:} >= sb(k) & rfTimeStart{K,:} <= eb(k));
         if ~isempty(L)
             L = [L(1)-1,L]; % get rawfile from before sb(k)
             % grab the ltsa pwr matrix to plot
@@ -145,13 +146,20 @@ while (k <= nb)
             pwr{k} = fread(fid,[PARAMS.ltsa.nf,nbin],'int8');   % read data
             fclose(fid);
             % make time vector
-            t1 = rfTime{K}(L(1));
+            t1 = rfTimeStart{K}(L);
+            t2 = rfTimeEnd{K}(L);
             dt = datenum([0 0 0 0 0 5]);
             
             % LTSA session time vector
-            pt{k} = [t1:dt:t1 + (nbin-1)*dt];
+            % build time vector by concatonating times for each raw file 
+            pt_temp = {};
+            for iTT = 1:size(t1,2)
+                pt_temp{iTT,1} = t1(iTT):dt:t2(iTT)-dt; 
+            end
+            pt{k} = horzcat(pt_temp{:});
+            
         else
-            rfT = rfTime{K,:};
+            rfT = rfTimeStart{K,:};
             disp('Missing raw file for this time ')
             disp(['bout start time is ',datestr(sb(k))])
             disp(['bout end time is ',datestr(eb(k))])
@@ -169,8 +177,8 @@ while (k <= nb)
             continue
         end
         
-        Ls = find(rfTime{Ks,:} >= sb(k));
-        Le = find(rfTime{Ke,:} <= eb(k));
+        Ls = find(rfTimeStart{Ks,:} >= sb(k));
+        Le = find(rfTimeEnd{Ke,:} <= eb(k));
         if ~isempty(Ls)
             Ls = [Ls(1)-1,Ls]; % get rawfile from before sb(k)
             
@@ -187,9 +195,14 @@ while (k <= nb)
             fclose(fid);
             
             % make time vector
-            t1 = rfTime{Ks}(Ls(1));
+            t1 = rfTimeStart{Ks}(Ls(1));
+            t2 = rfTimeEnd{K}(L);
             dt = datenum([0 0 0 0 0 5]);
-            ptLs = [t1:dt:t1 + (nbin-1)*dt];
+            pt_temp = {};
+            for iTT = 1:size(t1,2)
+                pt_temp{iTT,1} = t1(iTT):dt:t2(iTT)-dt; 
+            end
+            ptLs = horzcat(pt_temp{:});
         end
         if ~isempty(Le)
             
@@ -206,9 +219,14 @@ while (k <= nb)
             fclose(fid);
             
             % make time vector
-            t1 = rfTime{Ke}(Le(1));
+            t1 = rfTimeStart{K}(L(1));
+            t2 = rfTimeEnd{K}(L);
             dt = datenum([0 0 0 0 0 5]);
-            ptLe = [t1:dt:t1 + (nbin-1)*dt];
+            pt_temp = {};
+            for iTT = 1:size(t1,2)
+                pt_temp{iTT,1} = t1(iTT):dt:t2(iTT)-dt; 
+            end
+            ptLe = horzcat(pt_temp{:});
         end
         
         if isempty(Ls) || isempty(Le)
