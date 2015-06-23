@@ -461,7 +461,7 @@ while (k <= nb)
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % get key stroke
-    cc = get(201,'CurrentCharacter');
+    cc = get(gca,'CurrentCharacter');
     if strcmp(cc,'u')
         disp(' Update Display') % Stay on same bout
     elseif strcmp(cc,'s')
@@ -482,19 +482,19 @@ end
 pause off
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %make zFD unique
-load(fn2);   % load false detections
+load(fnFD);   % load false detections
 [uzFD,ia,ic] = unique(zFD);     % make zFD have unique entries
 if (length(ia) ~= length(ic))
     disp([' False Detect NOT UNIQUE - removed:   ', ...
         num2str(length(ic) - length(ia))]);
 end
 zFD = uzFD;
-save(fn2,'zFD');
+save(fnFD,'zFD');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(' ')
-disp(['Number of Starting Detections = ',num2str(length(ct)+2)])
+disp(['Number of Starting Detections = ',num2str(nb+2)])
 disp(' ')
-disp(['Number of True Detections = ',num2str(length(ct)-length(zFD)-length(zID)+2)])
+disp(['Number of True Detections = ',num2str(nb-length(zFD)-length(zID)+2)])
 disp(' ')
 disp(['Number of False Detections = ',num2str(length(zFD)-1)])
 disp(' ')
